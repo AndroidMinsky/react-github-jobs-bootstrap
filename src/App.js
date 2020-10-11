@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import JobView from "./JobView";
+import ModalView from "./ModalView";
+import Jobs from "./Jobs";
+import Navigation from "./Navigation";
+import Footer from "./Footer";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navigation />
+      <ModalSwitch />
+      <Footer />
+    </Router>
   );
 }
 
-export default App;
+function ModalSwitch() {
+  let location = useLocation();
+  let background = location.state && location.state.background;
+
+  return (
+    <div>
+      <Switch location={background || location}>
+        <Route exact path="/" children={<Jobs />} />
+        <Route path="/job/:id" children={<JobView />} />
+      </Switch>
+
+      {background && <Route path="/job/:id" children={<ModalView />} />}
+    </div>
+  );
+}
