@@ -36,7 +36,7 @@ export default function Footer() {
       </Navbar>
       <Navbar className="justify-content-center" bg="dark" variant="dark">
         <p className="text-secondary">
-          &#169; 2005 - {new Date().getFullYear()}, GitHub Jobs. All rights
+          &#169; 2005 - {new Date().getFullYear()}, GitHub Jobs. All rights.
           reserved.
         </p>
       </Navbar>
